@@ -1,7 +1,7 @@
 <div align="center" id="trendradar">
 
 <a href="https://github.com/sansan0/TrendRadar" title="TrendRadar">
-  <img src="/_image/banner.jpg" alt="TrendRadar Banner" width="50%">
+  <img src="/_image/banner.webp" alt="TrendRadar Banner" width="90%">
 </a>
 
 🚀 最快<strong>30秒</strong>部署的热点助手 —— 告别无效刷屏，只看真正关心的新闻资讯
@@ -13,10 +13,11 @@
 [![GitHub Stars](https://img.shields.io/github/stars/sansan0/TrendRadar?style=flat-square&logo=github&color=yellow)](https://github.com/sansan0/TrendRadar/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/sansan0/TrendRadar?style=flat-square&logo=github&color=blue)](https://github.com/sansan0/TrendRadar/network/members)
 [![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v3.0.5-blue.svg)](https://github.com/sansan0/TrendRadar)
+[![Version](https://img.shields.io/badge/version-v3.2.0-blue.svg)](https://github.com/sansan0/TrendRadar)
 [![MCP](https://img.shields.io/badge/MCP-v1.0.2-green.svg)](https://github.com/sansan0/TrendRadar)
 
 [![企业微信通知](https://img.shields.io/badge/企业微信-通知-00D4AA?style=flat-square)](https://work.weixin.qq.com/)
+[![个人微信通知](https://img.shields.io/badge/个人微信-通知-00D4AA?style=flat-square)](https://weixin.qq.com/)
 [![Telegram通知](https://img.shields.io/badge/Telegram-通知-00D4AA?style=flat-square)](https://telegram.org/)
 [![dingtalk通知](https://img.shields.io/badge/钉钉-通知-00D4AA?style=flat-square)](#)
 [![飞书通知](https://img.shields.io/badge/飞书-通知-00D4AA?style=flat-square)](https://www.feishu.cn/)
@@ -61,10 +62,9 @@
 
 <div align="center">
 
-| [🎯 核心功能](#-核心功能) | [🚀 快速开始](#-快速开始) | [⚙️ 配置详解](#-配置详解) | [🐳 Docker部署](#-docker-部署) |
-|:---:|:---:|:---:|:---:|
-| [🤖 AI 智能分析](#-ai-智能分析) | [🔌 MCP客户端](#-mcp-客户端) | [📝 更新日志](#-更新日志) | [❓ 答疑与交流](#问题答疑与交流) |
-| [⭐ 项目相关](#项目相关) | [🪄 赞助商](#-赞助商) | | |
+| [🚀 快速开始](#-快速开始) | [🤖 AI 智能分析](#-ai-智能分析) | [⚙️ 配置详解](#配置详解) | [📝 更新日志](#-更新日志) | [❓ 答疑与交流](#问题答疑与交流) |
+|:---:|:---:|:---:|:---:|:---:|
+| [🐳 Docker部署](#-docker-部署) | [🔌 MCP客户端](#-mcp-客户端) | [⭐ 项目相关](#项目相关) | [🪄 赞助商](#-赞助商) | |
 
 </div>
 
@@ -225,10 +225,23 @@
 
 设置个人关键词（如：AI、比亚迪、教育政策），只推送相关热点，过滤无关信息
 
-- 支持普通词、必须词(+)、过滤词(!)三种语法
-- 词组化管理，独立统计不同主题热点
+**基础语法**（4种）：
+- 普通词：基础匹配
+- 必须词 `+`：限定范围
+- 过滤词 `!`：排除干扰
+- 数量限制 `@`：控制显示数量（v3.2.0 新增）
 
-> 💡 关键词配置教程见 [配置详解 - 关键词配置](#2-关键词配置)  
+**高级功能**（v3.2.0 新增）：
+- 🔢 **关键词排序控制**：按热度优先 or 配置顺序优先
+- 📊 **显示数量精准限制**：全局配置 + 单独配置，灵活控制推送长度
+
+**词组化管理**：
+- 空行分隔，独立统计不同主题热点
+
+> 💡 **基础配置教程**：[关键词配置 - 基础语法](#关键词基础语法)
+>
+> 💡 **高级配置教程**：[关键词配置 - 高级配置](#关键词高级配置)
+>
 > 💡 也可以不做筛选，完整推送所有热点（将 frequency_words.txt 留空）
 
 ### **热点趋势分析**
@@ -314,13 +327,23 @@ GitHub 一键 Fork 即可使用，无需编程基础。
 - **大版本升级**：从 v1.x 升级到 v2.y，建议删除现有 fork 后重新 fork，这样更省力且避免配置冲突
 
 
-### 2025/11/12 - v3.0.5
+### 2025/11/23 - v3.2.0
 
-- 修复邮件发送 SSL/TLS 端口配置逻辑错误
-- 优化邮箱服务商（QQ/163/126）默认使用 465 端口（SSL）
-- **新增 Docker 环境变量支持**：核心配置项（`enable_crawler`、`report_mode`、`push_window` 等）支持通过环境变量覆盖，解决 NAS 用户修改配置文件不生效的问题（详见 [🐳 Docker 部署](#-docker-部署) 章节）
+**🎯 新增高级定制功能**
 
+1. **关键词排序优先级配置**
+   - 支持两种排序策略：热度优先 vs 配置顺序优先
+   - 满足不同使用场景：热点追踪 or 个性化关注
 
+2. **显示数量精准控制**
+   - 全局配置：统一限制所有关键词显示数量
+   - 单独配置：使用 `@数字` 语法为特定关键词设置限制
+   - 有效控制推送长度，突出重点内容
+
+> 📖 **详细配置教程**：[关键词配置 - 高级配置](#关键词高级配置)
+
+**🔧 升级说明**：
+- **GitHub Fork 用户**：更新 `main.py`、`config/config.yaml`
 
 ### 2025/11/18 - mcp-v1.0.2
 
@@ -330,6 +353,38 @@ GitHub 一键 Fork 即可使用，无需编程基础。
 
 <details>
 <summary>👉 点击展开：<strong>历史更新</strong></summary>
+
+
+### 2025/11/22 - v3.1.1
+
+- **修复数据异常导致的崩溃问题**：解决部分用户在 GitHub Actions 环境中遇到的 `'float' object has no attribute 'lower'` 错误
+- 新增双重防护机制：在数据获取阶段过滤无效标题（None、float、空字符串），同时在函数调用处添加类型检查
+- 提升系统稳定性，确保在数据源返回异常格式时仍能正常运行
+
+**升级说明**（GitHub Fork 用户）：
+- 必须更新：`main.py`
+- 建议使用小版本升级方式：复制替换上述文件
+
+
+### 2025/11/20 - v3.1.0
+
+- **新增个人微信推送支持**：企业微信应用可推送到个人微信，无需安装企业微信 APP
+- 支持两种消息格式：`markdown`（企业微信群机器人）和 `text`（个人微信应用）
+- 新增 `WEWORK_MSG_TYPE` 环境变量配置，支持 GitHub Actions、Docker、docker-compose 等多种部署方式
+- `text` 模式自动清除 Markdown 语法，提供纯文本推送效果
+- 详见快速开始中的「个人微信推送」配置说明
+
+**升级说明**（GitHub Fork 用户）：
+- 必须更新：`main.py`、`config/config.yaml`
+- 可选更新：`.github/workflows/crawler.yml`（如使用 GitHub Actions 部署）
+- 建议使用小版本升级方式：复制替换上述文件
+
+### 2025/11/12 - v3.0.5
+
+- 修复邮件发送 SSL/TLS 端口配置逻辑错误
+- 优化邮箱服务商（QQ/163/126）默认使用 465 端口（SSL）
+- **新增 Docker 环境变量支持**：核心配置项（`enable_crawler`、`report_mode`、`push_window` 等）支持通过环境变量覆盖，解决 NAS 用户修改配置文件不生效的问题（详见 [🐳 Docker 部署](#-docker-部署) 章节）
+
 
 ### 2025/10/26 - mcp-v1.0.1
 
@@ -652,6 +707,37 @@ frequency_words.txt 文件增加了一个【必须词】功能，使用 + 号
    </details>
 
    <details>
+   <summary>👉 点击展开：<strong>个人微信推送</strong>（基于企业微信应用，推送到个人微信）</summary>
+   <br>
+
+   > 由于该方案是基于企业微信的插件机制，推送样式为纯文本（无 markdown 格式），但可以直接推送到个人微信，无需安装企业微信 App。
+
+   **GitHub Secret 配置（⚠️ Name 名称必须严格一致）：**
+   - **Name（名称）**：`WEWORK_WEBHOOK_URL`（请复制粘贴此名称，不要手打）
+   - **Secret（值）**：你的企业微信应用 Webhook 地址
+
+   - **Name（名称）**：`WEWORK_MSG_TYPE`（请复制粘贴此名称，不要手打）
+   - **Secret（值）**：`text`
+
+   <br>
+
+   **设置步骤：**
+
+   1. 完成上方的企业微信机器人 Webhook 设置
+   2. 添加 `WEWORK_MSG_TYPE` Secret，值设为 `text`
+   3. 按照下面图片操作，关联个人微信
+   4. 配置好后，手机上的企业微信 App 可以删除
+
+   <img src="_image/wework.png" title="个人微信推送配置"/>
+
+   **说明**：
+   - 与企业微信机器人使用相同的 Webhook 地址
+   - 区别在于消息格式：`text` 为纯文本，`markdown` 为富文本（默认）
+   - 纯文本格式会自动去除所有 markdown 语法（粗体、链接等）
+
+   </details>
+
+   <details>
    <summary>👉 点击展开：<strong>飞书机器人</strong>（消息显示最友好）</summary>
    <br>
 
@@ -851,12 +937,16 @@ frequency_words.txt 文件增加了一个【必须词】功能，使用 + 号
    | **126邮箱** | 126.com | smtp.126.com | 465 | SSL |
    | **新浪邮箱** | sina.com | smtp.sina.com | 465 | SSL |
    | **搜狐邮箱** | sohu.com | smtp.sohu.com | 465 | SSL |
+   | **天翼邮箱** | 189.cn | smtp.189.cn | 465 | SSL |
 
    > **自动识别**：使用以上邮箱时，无需手动配置 `EMAIL_SMTP_SERVER` 和 `EMAIL_SMTP_PORT`，系统会自动识别。
    >
    > **反馈说明**：
    > - 如果你使用**其他邮箱**测试成功，欢迎开 [Issues](https://github.com/sansan0/TrendRadar/issues) 告知，我会添加到支持列表
    > - 如果上述邮箱配置有误或无法使用，也请开 [Issues](https://github.com/sansan0/TrendRadar/issues) 反馈，帮助改进项目
+   >
+   > **特别感谢**：
+   > - 感谢 [@DYZYD](https://github.com/DYZYD) 贡献天翼邮箱（189.cn）配置并完成自发自收测试 ([#291](https://github.com/sansan0/TrendRadar/issues/291))
 
    **常见邮箱设置：**
 
@@ -1038,8 +1128,35 @@ frequency_words.txt 文件增加了一个【必须词】功能，使用 + 号
     - **关键词设置**：在 [config/frequency_words.txt](config/frequency_words.txt) 中添加你关心的关键词
     - **推送频率调整**：在 [.github/workflows/crawler.yml](.github/workflows/crawler.yml) 请谨慎调整，别贪心
 
-    **注意**：建议只调整文档中明确说明的配置项，其他选项主要供作者开发时测试使用
+    **注意**：建议只调整文档中明确说明的配置项,其他选项主要供作者开发时测试使用
 
+5. **🎉 部署成功！分享你的使用体验**
+
+   恭喜你完成了 TrendRadar 的配置！现在你可以开始追踪热点资讯了。
+
+   💬 **有更多小伙伴在公众号交流使用心得，期待你的分享~**
+
+   - 想了解更多玩法和高级技巧？
+   - 遇到问题需要快速解答？
+   - 有好的想法想要交流？
+
+   👉 **欢迎关注公众号「硅基茶水间」**，你的点赞和留言都是项目持续更新的动力。
+
+   详细的交流方式，请查看 → [问题答疑与交流](#问题答疑与交流)
+
+6. **想要更智能的分析？试试 AI 增强功能**（可选）
+
+   基础配置已经能满足日常使用，但如果你想要：
+
+   - 📊 让 AI 自动分析热点趋势和数据洞察
+   - 🔍 通过自然语言搜索和查询新闻
+   - 💡 获得情感分析、话题预测等深度分析
+   - ⚡ 在 Claude、Cursor 等 AI 工具中直接调用数据
+
+   👉 **了解更多**：[AI 智能分析](#-ai-智能分析) — 解锁项目的隐藏能力，让热点追踪更高效！
+
+
+<a name="配置详解"></a>
 
 ## ⚙️ 配置详解
 
@@ -1071,21 +1188,22 @@ platforms:
 
 ### 2. 关键词配置
 
-<details id="frequencywordstxt-配置教程">
-<summary>👉 点击展开：<strong>frequency_words.txt 配置教程</strong></summary>
-<br>
-
-在 `frequency_words.txt` 文件中配置监控的关键词，支持三种语法和词组功能。
-
-关键词越靠前，新闻的优先级越高，你可以根据自己的关注度调整关键词顺序
+在 `frequency_words.txt` 文件中配置监控的关键词，支持四种语法和词组功能。
 
 | 语法类型 | 符号 | 作用 | 示例 | 匹配逻辑 |
 |---------|------|------|------|---------|
 | **普通词** | 无 | 基础匹配 | `华为` | 包含任意一个即可 |
 | **必须词** | `+` | 限定范围 | `+手机` | 必须同时包含 |
 | **过滤词** | `!` | 排除干扰 | `!广告` | 包含则直接排除 |
+| **数量限制** | `@` | 控制显示数量 | `@10` | 最多显示10条新闻（v3.2.0新增） |
 
-#### 📋 基础语法说明
+#### 2.1 基础语法
+
+<a name="关键词基础语法"></a>
+
+<details>
+<summary>👉 点击展开：<strong>基础语法教程</strong></summary>
+<br>
 
 ##### 1. **普通关键词** - 基础匹配
 ```txt
@@ -1111,6 +1229,18 @@ OPPO
 !价格
 ```
 **作用：** 包含过滤词的新闻会被**直接排除**，即使包含关键词
+
+##### 4. **数量限制** `@数字` - 控制显示数量（v3.2.0 新增）
+```txt
+特斯拉
+马斯克
+@5
+```
+**作用：** 限制该关键词组最多显示的新闻条数
+
+**配置优先级：** `@数字` > 全局配置 > 不限制
+
+---
 
 #### 🔗 词组功能 - 空行分隔的重要作用
 
@@ -1152,27 +1282,23 @@ A股
 - 关键词：A股、上证、深证
 - 必须词：涨跌
 - 过滤词：预测
-- 效果：包含股市相关词，同时包含"涨跌"，但排除包含"预测"的内容
+- 效果：关注股市涨跌实况，排除预测类内容
 
 **匹配示例：**
 - ✅ "A股今日大幅涨跌分析" ← 有"A股"+"涨跌"
-- ✅ "上证指数涨跌原因解读" ← 有"上证"+"涨跌"
+- ✅ "上证指数涨跌幅创新高" ← 有"上证"+"涨跌"
 - ❌ "专家预测A股涨跌趋势" ← 有"A股"+"涨跌"但包含"预测"
-- ❌ "A股成交量创新高" ← 有"A股"但缺少"涨跌"
 
 **第3组 - 足球赛事类：**
 - 关键词：世界杯、欧洲杯、亚洲杯
 - 必须词：比赛
-- 效果：必须包含杯赛名称，同时包含"比赛"
+- 效果：只关注比赛相关新闻
 
-**匹配示例：**
-- ✅ "世界杯小组赛比赛结果" ← 有"世界杯"+"比赛"
-- ✅ "欧洲杯决赛比赛时间" ← 有"欧洲杯"+"比赛"
-- ❌ "世界杯门票开售" ← 有"世界杯"但缺少"比赛"
+---
 
-#### 🎯 配置技巧
+#### 📝 配置技巧
 
-##### 1. **从宽到严的配置策略**
+##### 1. **从宽到严**
 ```txt
 # 第一步：先用宽泛关键词测试
 人工智能
@@ -1195,6 +1321,7 @@ ChatGPT
 ```
 
 ##### 2. **避免过度复杂**
+
 ❌ **不推荐：** 一个词组包含太多词汇
 ```txt
 华为
@@ -1226,6 +1353,69 @@ OPPO
 销量
 +市场
 ```
+
+</details>
+
+#### 2.2 高级配置（v3.2.0 新增）
+
+<a name="关键词高级配置"></a>
+
+<details>
+<summary>👉 点击展开：<strong>高级配置教程</strong></summary>
+<br>
+
+##### 关键词排序优先级
+
+**配置位置：** `config/config.yaml`
+
+```yaml
+report:
+  sort_by_position_first: false  # 排序优先级配置
+```
+
+| 配置值 | 排序规则 | 适用场景 |
+|--------|---------|---------|
+| `false`（默认） | 热点条数 ↓ → 配置位置 ↑ | 关注热度趋势 |
+| `true` | 配置位置 ↑ → 热点条数 ↓ | 关注个人优先级 |
+
+**示例：** 配置顺序 A、B、C，热点数 A(3条)、B(10条)、C(5条)
+- `false`：B(10条) → C(5条) → A(3条)
+- `true`：A(3条) → B(10条) → C(5条)
+
+##### 全局显示数量限制
+
+```yaml
+report:
+  max_news_per_keyword: 10  # 每个关键词最多显示10条（0=不限制）
+```
+
+**Docker 环境变量：**
+```bash
+SORT_BY_POSITION_FIRST=true
+MAX_NEWS_PER_KEYWORD=10
+```
+
+**综合示例：**
+```yaml
+# config.yaml
+report:
+  sort_by_position_first: true   # 按配置顺序优先
+  max_news_per_keyword: 10       # 全局默认每个关键词最多10条
+```
+
+```txt
+# frequency_words.txt
+特斯拉
+马斯克
+@20              # 重点关注，显示20条（覆盖全局配置）
+
+华为            # 使用全局配置，显示10条
+
+比亚迪
+@5               # 限制5条
+```
+
+**最终效果：** 按配置顺序显示 特斯拉(20条) → 华为(10条) → 比亚迪(5条)
 
 </details>
 
@@ -1904,89 +2094,6 @@ MCP Inspector 是官方调试工具，用于测试 MCP 连接：
 </details>
 
 
-## ☕问题答疑与交流
-
-> 如果你想支持本项目，可通过微信搜索**腾讯公益**，对里面的**助学计划**随心捐助~
->
-> 我还在为信息过载而焦虑，而他们却在信息荒漠中挣扎，他们比我更需要支持。 
-
-<details>
-<summary>👉 点击展开：<b>作者有话说</b></summary>
-<br>
-
-感谢各位支持！因获得[赞助商](#-赞助商)的赞助，现已移除我个人的**一元点赞**打赏码。
-
-之前参与**一元点赞**的朋友已收录至顶部**致谢名单**。
-
-本项目开发和维护投入了大量时间、精力和成本（含 AI 模型费用），有了赞助支持后可以更安心维护。
-</details>
-
-- **GitHub Issues**：适合针对性强的解答。提问时请提供完整信息（截图、错误日志、系统环境等）。
-- **公众号交流**：适合快速咨询。建议优先在相关文章下的公共留言区交流，如私信，请文明礼貌用语😉
-- 💡 部署成功了？欢迎来公众号留言点赞，分享你的使用体验~
-
-
-<div align="center">
-
-|公众号关注 |
-|:---:|
-| <img src="_image/weixin.png" width="400" title="硅基茶水间"/> |
-
-</div>
-
-## 🪄 赞助商
-
-> **302.AI** 是按用量付费的企业级 AI 资源平台      
-> 提供市场上最新、最全面的 **AI 模型**和 **API**，以及多种开箱即用的在线 AI 应用
-
-<div align="center">
-
-<a href="https://share.302.ai/mEOUzG" target="_blank">
-  <img src="_image/banner-302ai-zh.jpg" alt="302.AI" width="800"/>
-</a>
-</div>
-
-### 💰 302.AI 新用户福利
-
-> 领取的 1 美元可用于调用各种 AI 大模型（如 Claude、GPT 等）      
-> 本项目 AI 分析功能需配置大模型使用，配置教程详见 [AI 智能分析](#-ai-智能分析)
-
-[![注册领取](https://img.shields.io/badge/注册_302.AI-领取_1_美元免费测试额度-FF6B6B?style=for-the-badge&logo=openai&logoColor=white)](https://share.302.ai/mEOUzG)
-
-<details id="sponsor-tutorial">
-<summary>👉 点击展开：<b>302.AI 使用教程</b></summary>
-
-
-### 第 1 步：获取 API Key
-
-1. 注册后，进入右上角 [管理后台](https://302.ai/dashboard/overview)
-2. 点击左侧 [API Keys](https://302.ai/apis/list)
-3. 在页面下方找到默认 API KEY，**点击眼睛图标查看**，然后复制
-   （⚠️ 注意：不是点最右侧的复制按钮）
-
-
-### 第 2 步：在 Cherry Studio 中配置
-
-1. 打开 Cherry Studio，进入设置
-2. 模型提供商选择 **"302.AI"**
-3. 粘贴刚才复制的 API Key
-4. 点击**管理**，现在可以使用所有支持的 AI 模型了
-
-**提示：** Cherry Studio 已原生集成 302.AI，配置后即可看到完整模型列表。
-
-
-**Q: 1 美元免费额度能用多久？**    
-A: 取决于使用频率和模型选择，可以进行多次测试体验。
-
-**Q: 免费额度用完后怎么办？**    
-A: 可以按需充值，按量付费。目前大厂模型价格已相对亲民。
-
-</details>
-
-<br>
-
----
-
 
 ### 常见问题
 
@@ -2068,6 +2175,83 @@ A: 可以按需充值，按量付费。目前大厂模型价格已相对亲民�
 
 </details>
 
+
+## ☕问题答疑与交流
+
+> 如果你想支持本项目，可通过微信搜索**腾讯公益**，对里面的**助学**相关的项目随心捐助
+>
+> 感谢参与过**一元点赞**的朋友，已收录至顶部**致谢名单**！你们的支持让开源维护更有动力，个人打赏码现已移除。
+
+- **GitHub Issues**：适合针对性强的解答。提问时请提供完整信息（截图、错误日志、系统环境等）。
+- **公众号交流**：适合快速咨询。建议优先在相关文章下的公共留言区交流，如私信，请文明礼貌用语😉
+- 💡 部署成功了？来公众号说说感受吧，你的点赞和留言都是我继续更新的动力~
+
+
+<div align="center">
+
+|公众号关注 |
+|:---:|
+| <img src="_image/weixin.png" width="400" title="硅基茶水间"/> |
+
+</div>
+
+<br>
+
+---
+
+## 🪄 赞助商
+
+> **302.AI** 是按用量付费的企业级 AI 资源平台      
+> 提供市场上最新、最全面的 **AI 模型**和 **API**，以及多种开箱即用的在线 AI 应用
+
+<div align="center">
+
+<a href="https://share.302.ai/mEOUzG" target="_blank">
+  <img src="_image/banner-302ai-zh.jpg" alt="302.AI" width="800"/>
+</a>
+</div>
+
+### 💰 302.AI 新用户福利
+
+> 领取的 1 美元可用于调用各种 AI 大模型（如 Claude、GPT 等）      
+> 本项目 AI 分析功能需配置大模型使用，配置教程详见 [AI 智能分析](#-ai-智能分析)
+
+[![注册领取](https://img.shields.io/badge/注册_302.AI-领取_1_美元免费测试额度-FF6B6B?style=for-the-badge&logo=openai&logoColor=white)](https://share.302.ai/mEOUzG)
+
+<details id="sponsor-tutorial">
+<summary>👉 点击展开：<b>302.AI 使用教程</b></summary>
+
+
+### 第 1 步：获取 API Key
+
+1. 注册后，进入右上角 [管理后台](https://302.ai/dashboard/overview)
+2. 点击左侧 [API Keys](https://302.ai/apis/list)
+3. 在页面下方找到默认 API KEY，**点击眼睛图标查看**，然后复制
+   （⚠️ 注意：不是点最右侧的复制按钮）
+
+
+### 第 2 步：在 Cherry Studio 中配置
+
+1. 打开 Cherry Studio，进入设置
+2. 模型提供商选择 **"302.AI"**
+3. 粘贴刚才复制的 API Key
+4. 点击**管理**，现在可以使用所有支持的 AI 模型了
+
+**提示：** Cherry Studio 已原生集成 302.AI，配置后即可看到完整模型列表。
+
+
+**Q: 1 美元免费额度能用多久？**    
+A: 取决于使用频率和模型选择，可以进行多次测试体验。
+
+**Q: 免费额度用完后怎么办？**    
+A: 可以按需充值，按量付费。目前大厂模型价格已相对亲民。
+
+</details>
+
+---
+
+<br>
+
 ### 项目相关
 
 > **4 篇文章**：
@@ -2093,21 +2277,6 @@ A: 可以按需充值，按量付费。目前大厂模型价格已相对亲民�
 
 - https://github.com/sansan0/bilibili-comment-analyzer
 
-
-<details>
-<summary>👉 点击展开：<strong>微信推送通知方案</strong></summary>
-<br>
-
-> 由于该方案是基于企业微信的插件机制，推送样式也十分不同，所以相关实现我暂时不准备纳入当前项目
-
-- fork 这位兄台的项目 https://github.com/jayzqj/TrendRadar
-- 完成上方的企业微信推送设置 
-- 按照下面图片操作
-- 配置好后，手机上的企业微信 app 删除掉也没事
-
-<img src="_image/wework.png"  title="github"/>
-
-</details>
 
 ### 本项目流程图
 
